@@ -1,1 +1,147 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
+
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$blue-palette,
+    ),
+  )
+);
+
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$blue-palette,
+    ),
+  )
+);
+
+html {
+  @include mat.all-component-themes($light-theme);
+}
+
+html.dark {
+  @include mat.all-component-themes($dark-theme);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #f1f0e8;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+
+  --status-active-bg: #dcfce7;
+  --status-active-text: #166534;
+  --status-closed-bg: #f1f5f9;
+  --status-closed-text: #475569;
+  --status-default-bg: #fee2e2;
+  --status-default-text: #991b1b;
+  --status-review-bg: #fef3c7;
+  --status-review-text: #92400e;
+  --color-warning: #991b1b;
+  --border-warning: #991b1b;
+}
+
+html.dark {
+  --bg-primary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-2: #273549;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --accent-color: #60a5fa;
+  --accent-hover: #3b82f6;
+
+  --status-active-bg: #14532d;
+  --status-active-text: #86efac;
+  --status-closed-bg: #1e293b;
+  --status-closed-text: #94a3b8;
+  --status-default-bg: #450a0a;
+  --status-default-text: #fca5a5;
+  --status-review-bg: #451a03;
+  --status-review-text: #fcd34d;
+  --color-warning: #ffffff;
+  --border-warning: #991b1b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  min-height: 100vh;
+}
+
+.surface-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px var(--shadow-color);
+  border-radius: 0.75rem;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.loan-table-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.trend-positive {
+  color: #16a34a;
+}
+.trend-negative {
+  color: #dc2626;
+}
+html.dark .trend-positive {
+  color: #4ade80;
+}
+html.dark .trend-negative {
+  color: #f87171;
+}
+
+html.dark .mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #1e293b;
+  color: #f8fafc;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}

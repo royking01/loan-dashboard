@@ -1,0 +1,10 @@
+button {
+  border-radius: 8px !important;
+}
+.mat-mdc-outlined-button:not(:disabled) {
+  color: var(--text-primary);
+}
+.mat-mdc-unelevated-button:not(:disabled) {
+  background-color: red;
+  color: #ffff;
+}

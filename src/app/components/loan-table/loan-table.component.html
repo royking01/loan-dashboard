@@ -1,0 +1,130 @@
+<div class="loan-table-container">
+  <p class="p-5 font-bold uppercase">Loan Records</p>
+  <div
+    class="border-b flex items-center gap-2 rounded-[12px] input-wrapper px-5 py-2 mx-5 mb-5 broder-[#d1d5d8] border-[2px]"
+  >
+    <input
+      type="search"
+      [(ngModel)]="searchInput"
+      (ngModelChange)="onSearch($event)"
+      placeholder="Search by name, ID..."
+      class="flex-1 bg-transparent outline-none text-sm"
+      aria-label="Search loans"
+    />
+  </div>
+
+  <div class="hidden md:grid table-header">
+    @for (col of columns; track col.key) {
+      <button
+        (click)="sort(col.key)"
+        class="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-left cursor-pointer bg-none border-none col-item"
+        [attr.aria-label]="'Sort by ' + col.label"
+      >
+        {{ col.label }}
+        @if (col.sortable) {
+          <span class="text-xs opacity-50">
+            @if (sortColumn() === col.key) {
+              {{ sortDir() === "asc" ? "↑" : "↓" }}
+            } @else {
+              ↕
+            }
+          </span>
+        }
+      </button>
+    }
+    <span class="text-xs font-semibold uppercase tracking-wider"></span>
+  </div>
+
+  <div class="divider">
+    @for (loan of pagedLoans(); track loan.id) {
+      <div
+        class="flex flex-col md:grid px-5 py-3 hover:bg-opacity-50 transition-colors table-rows divider border-b"
+        [style.background]="'transparent'"
+        (mouseenter)="hovered = loan.id"
+        (mouseleave)="hovered = ''"
+        [class.row-hover]="hovered === loan.id"
+      >
+        <div class="md:contents flex flex-wrap gap-2 text-sm">
+          <span class="font-normal text-xs flex items-center">{{
+            loan.id
+          }}</span>
+          <span
+            class="flex font-normal items-center"
+            style="color: var(--text-primary)"
+            >{{ loan.borrower }}</span
+          >
+          <span class="flex font-normal items-center">{{
+            loan.amount | currency: "USD" : "symbol" : "1.0-2"
+          }}</span>
+          <span class="flex font-normal items-center">{{ loan.rate }}%</span>
+          <span
+            class="status-badge flex items-center justify-center rounded-full w-fit px-6 py-1 font-medium"
+            [class]="'status-' + loan.status.toLowerCase()"
+            >{{ loan.status }}</span
+          >
+          <span class="flex font-normal items-center">{{
+            loan.date | date
+          }}</span>
+          <button
+            (click)="openDeleteDialog(loan)"
+            class="text-xs px-2 py-1 rounded-[4px] delete-btn px-[10px] py-1 border"
+            [matTooltip]="'Delete ' + loan.id"
+            aria-label="Delete loan"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    } @empty {
+      <div class="py-12 text-center text-muted">
+        <span class="material-icons text-4xl block mb-2">search_off</span>
+        <p>No loans found matching your search.</p>
+      </div>
+    }
+  </div>
+
+  <div class="px-4 py-3 border-t flex items-center justify-end flex-wrap gap-2">
+    <span class="text-sm" style="color: var(--text-secondary)">
+      Page {{ currentPage() }} of {{ totalPages() }} ({{
+        loanService.filteredLoans().length
+      }}
+      results)
+    </span>
+    <div class="flex items-center gap-1">
+      <button
+        (click)="goToPage(currentPage() - 1)"
+        [disabled]="currentPage() <= 1"
+        class="w-8 h-8 rounded flex items-center justify-center text-sm transition-all nav-btn"
+        [style.opacity]="currentPage() <= 1 ? '0.4' : '1'"
+        aria-label="Previous page"
+      >
+        ‹
+      </button>
+      @for (p of pageNumbers(); track p) {
+        <button
+          (click)="goToPage(p)"
+          class="w-8 h-8 rounded flex items-center justify-center text-sm transition-all"
+          [style.background]="
+            p === currentPage() ? 'var(--accent-color)' : 'var(--bg-surface)'
+          "
+          [style.color]="
+            p === currentPage() ? '#ffffff' : 'var(--text-secondary)'
+          "
+          [attr.aria-current]="p === currentPage() ? 'page' : null"
+          [attr.aria-label]="'Page ' + p"
+        >
+          {{ p }}
+        </button>
+      }
+      <button
+        (click)="goToPage(currentPage() + 1)"
+        [disabled]="currentPage() >= totalPages()"
+        class="w-8 h-8 rounded flex items-center justify-center text-sm transition-all nav-btn"
+        [style.opacity]="currentPage() >= totalPages() ? '0.4' : '1'"
+        aria-label="Next page"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="theme-toggle-wrapper flex gap-2 items-center text-muted">
+  <span class="label">Light</span>
+  <mat-slide-toggle
+    (change)="themeService.toggle()"
+    [checked]="themeService.isDark()"
+  ></mat-slide-toggle>
+  <span class="label">Dark</span>
+</div>

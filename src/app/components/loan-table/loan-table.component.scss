@@ -1,0 +1,59 @@
+.row-hover {
+  background: var(--bg-surface-2) !important;
+}
+.input-wrapper {
+  background: var(--bg-surface-2) !important;
+  input {
+    color: var(--text-primary);
+  }
+}
+
+.col-item {
+  color: var(--text-secondary);
+}
+.table-rows,
+.table-header {
+  grid-template-columns: 1fr 1.5fr 1.2fr 0.8fr 1fr 1fr 0.6fr;
+}
+.table-header {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.table-rows {
+  gap: 0 1rem;
+  background: transparent;
+}
+
+.nav-btn {
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: var(--color-warning);
+  border: 1px solid var(--border-warning);
+}
+
+.status {
+  &-active {
+    background: var(--status-active-bg);
+    color: var(--status-active-text);
+  }
+  &-closed {
+    background: var(--status-closed-bg);
+    color: var(--status-closed-text);
+  }
+  &-default {
+    background: var(--status-default-bg);
+    color: var(--status-default-text);
+  }
+  &-review {
+    background: var(--status-review-bg);
+    color: var(--status-review-text);
+  }
+}
+.divider {
+  border-color: var(--border-color);
+}

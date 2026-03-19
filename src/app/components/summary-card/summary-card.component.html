@@ -1,0 +1,28 @@
+<div class="surface-card p-5 flex flex-col gap-2">
+  @if (cardItem().icon) {
+    <div
+      class="bg-[#EBF2FF] rounded-[8px] w-10 h-10 flex items-center justify-center"
+    >
+      <span
+        class="material-icons text-medium text-[#3366FF] font-bold p-4 icon"
+        [ngClass]="{
+          'rotate-45': cardItem().icon === 'fitness_center',
+        }"
+        >{{ cardItem().icon }}</span
+      >
+    </div>
+  }
+  <span class="text-sm font-normal text-muted label">
+    {{ cardItem().label }}
+  </span>
+  <div class="text-2xl font-bold value">
+    {{ cardItem().value | number }}
+  </div>
+  <div
+    class="text-sm font-medium flex items-center gap-1 trend"
+    [ngClass]="cardItem().trend >= 0 ? 'trend-positive' : 'trend-negative'"
+  >
+    <span>{{ cardItem().trend >= 0 ? "▲" : "▼" }}</span>
+    <span>{{ formattedTrend() }}</span>
+  </div>
+</div>

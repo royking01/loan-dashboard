@@ -1,0 +1,9 @@
+.dashboard-wrapper {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+header {
+  //   background: var(--bg-surface);
+  border-color: var(--border-color);
+  backdrop-filter: blur(8px);
+}
