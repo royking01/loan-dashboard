@@ -76,5 +76,4 @@ export class LoanChartComponent {
       { label: 'Personal', percentage: dist.Personal, color: this.COLORS[3] },
     ];
   });
-  all;
 }
